@@ -168,6 +168,13 @@ body.sidebar-open-lock {
   letter-spacing: -0.5px;
 }
 
+.brand-title-accent {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
 /* Navbar Controls */
 .navbar-controls {
   display: flex;
