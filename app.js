@@ -388,8 +388,12 @@ document.addEventListener("DOMContentLoaded", () => {
     pomoStartBtn.textContent = "▶";
   });
 
-  // 9. 테마 토글 (다크/라이트)
-  const savedTheme = localStorage.getItem("counseling_theme") || "light";
+  // 9. 테마 토글 (안티그래비티 딥 블랙 테마 기본 적용)
+  let savedTheme = localStorage.getItem("counseling_theme");
+  if (!savedTheme || savedTheme === "light") {
+    savedTheme = "dark";
+    localStorage.setItem("counseling_theme", "dark");
+  }
   document.documentElement.setAttribute("data-theme", savedTheme);
   btnThemeToggle.textContent = savedTheme === "dark" ? "☀️" : "🌙";
 

@@ -5,7 +5,80 @@
 :root {
   --font-main: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   
-  /* 라이트 모드 색상 */
+  /* 안티그래비티 딥 블랙 테마 (기본값) */
+  --bg-app: #090a0f;           /* 안티그래비티 딥 블랙 */
+  --bg-sidebar: #0d0e15;       /* 사이드바 다크 */
+  --bg-card: #13151f;          /* 카드 블랙 표면 */
+  --bg-header: #0d0e15;        /* 상단 헤더 */
+  --text-main: #f8fafc;        /* 흰색 본문 텍스트 */
+  --text-muted: #94a3b8;       /* 보조 은은한 회색 */
+  --text-inverse: #090a0f;
+  
+  --border-color: #232738;
+  --border-subtle: #171924;
+  
+  /* 노란색 (Yellow) 핵심 강조 */
+  --primary: #facc15;          /* 선명한 골든 옐로우 */
+  --primary-hover: #eab308;
+  --primary-light: #231f0d;    /* 옐로우 틴트 다크 배경 */
+  --primary-border: #854d0e;
+  
+  --accent-amber: #facc15;
+  --accent-amber-bg: #211c08;
+  --accent-amber-border: #854d0e;
+  
+  --accent-green: #34d399;
+  --accent-green-bg: #0b1f17;
+  --accent-green-border: #065f46;
+  
+  --accent-purple: #c084fc;
+  --accent-purple-bg: #1e1b2e;
+  
+  --blind-bg: #222638;
+  --blind-text: transparent;
+  --blind-border: #475569;
+  
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.6), 0 2px 4px -2px rgb(0 0 0 / 0.6);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.7), 0 4px 6px -4px rgb(0 0 0 / 0.7);
+
+  --sidebar-width: 320px;
+}
+
+[data-theme="dark"] {
+  --bg-app: #090a0f;
+  --bg-sidebar: #0d0e15;
+  --bg-card: #13151f;
+  --bg-header: #0d0e15;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-inverse: #090a0f;
+  
+  --border-color: #232738;
+  --border-subtle: #171924;
+  
+  --primary: #facc15;
+  --primary-hover: #eab308;
+  --primary-light: #231f0d;
+  --primary-border: #854d0e;
+  
+  --accent-amber: #facc15;
+  --accent-amber-bg: #211c08;
+  --accent-amber-border: #854d0e;
+  
+  --accent-green: #34d399;
+  --accent-green-bg: #0b1f17;
+  --accent-green-border: #065f46;
+  
+  --accent-purple: #c084fc;
+  --accent-purple-bg: #1e1b2e;
+  
+  --blind-bg: #222638;
+  --blind-text: transparent;
+  --blind-border: #475569;
+}
+
+[data-theme="light"] {
   --bg-app: #f8fafc;
   --bg-sidebar: #ffffff;
   --bg-card: #ffffff;
@@ -36,45 +109,6 @@
   --blind-bg: #e2e8f0;
   --blind-text: transparent;
   --blind-border: #94a3b8;
-  
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-
-  --sidebar-width: 320px;
-}
-
-[data-theme="dark"] {
-  --bg-app: #090d16;
-  --bg-sidebar: #111827;
-  --bg-card: #161f30;
-  --bg-header: #111827;
-  --text-main: #f1f5f9;
-  --text-muted: #94a3b8;
-  --text-inverse: #0f172a;
-  
-  --border-color: #243048;
-  --border-subtle: #1a2336;
-  
-  --primary: #3b82f6;
-  --primary-hover: #60a5fa;
-  --primary-light: #172554;
-  --primary-border: #1e3a8a;
-  
-  --accent-amber: #f59e0b;
-  --accent-amber-bg: #291e0a;
-  --accent-amber-border: #78350f;
-  
-  --accent-green: #10b981;
-  --accent-green-bg: #062e20;
-  --accent-green-border: #065f46;
-  
-  --accent-purple: #a78bfa;
-  --accent-purple-bg: #25124a;
-  
-  --blind-bg: #334155;
-  --blind-text: transparent;
-  --blind-border: #475569;
 }
 
 /* Base Styles */
@@ -522,14 +556,15 @@ body.sidebar-open-lock {
   transition: margin-left 0.3s ease;
 }
 
-/* ADHD 학습 전략 인트로 배너 */
+/* ADHD 학습 전략 인트로 배너 (안티그래비티 다크 스타일) */
 .intro-banner {
-  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-  color: white;
+  background: linear-gradient(135deg, #0d101a, #151a28);
+  color: #f8fafc;
+  border: 1.5px solid #ca8a04;
   border-radius: 16px;
   padding: 24px 28px;
   margin-bottom: 32px;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .intro-banner-inner {
@@ -546,22 +581,27 @@ body.sidebar-open-lock {
   margin-bottom: 8px;
   letter-spacing: -0.3px;
   line-height: 1.35;
+  color: #ffffff;
 }
 
 .intro-desc {
   font-size: 0.92rem;
-  opacity: 0.95;
+  color: #cbd5e1;
   line-height: 1.6;
 }
 
+.intro-desc strong {
+  color: #facc15;
+}
+
 .intro-stats-badge {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
+  background: #1f1b0a;
+  border: 1.5px solid #ca8a04;
   padding: 12px 18px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
   font-size: 0.85rem;
   font-weight: 700;
+  color: #fef08a;
   white-space: nowrap;
 }
 
@@ -650,30 +690,33 @@ body.sidebar-open-lock {
 }
 
 .badge-priority.p3 {
-  background-color: #fee2e2;
-  color: #b91c1c;
+  background-color: #3b0b0b;
+  color: #f87171;
+  border: 1px solid #7f1d1d;
 }
 
 .badge-priority.p2 {
-  background-color: #fef3c7;
-  color: #b45309;
+  background-color: #2b1f06;
+  color: #facc15;
+  border: 1px solid #78350f;
 }
 
 .badge-priority.p1 {
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: #171c28;
+  color: #94a3b8;
+  border: 1px solid #282f44;
 }
 
 .badge-exam {
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: #94a3b8;
   font-weight: 600;
 }
 
 .topic-main-title {
   font-size: 1.35rem;
   font-weight: 800;
-  color: var(--text-main);
+  color: #ffffff;
   letter-spacing: -0.3px;
 }
 
@@ -687,7 +730,7 @@ body.sidebar-open-lock {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: var(--bg-app);
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   color: var(--text-muted);
   padding: 6px 12px;
@@ -699,29 +742,29 @@ body.sidebar-open-lock {
 }
 
 .btn-complete-topic:hover {
-  border-color: var(--accent-green);
-  color: var(--accent-green);
+  border-color: #facc15;
+  color: #facc15;
 }
 
 .btn-complete-topic.completed {
-  background-color: var(--accent-green-bg);
-  border-color: var(--accent-green-border);
-  color: var(--accent-green);
+  background-color: #211c08;
+  border-color: #ca8a04;
+  color: #facc15;
 }
 
-/* Chunking Box (ADHD Special) */
+/* Chunking Box (안티그래비티 옐로우/블랙 스타일) */
 .chunking-box {
-  background-color: var(--accent-amber-bg);
-  border-left: 4px solid var(--accent-amber);
+  background-color: #1f1b09;
+  border-left: 4px solid #facc15;
   border-radius: 0 10px 10px 0;
   padding: 14px 18px;
   margin-bottom: 22px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: var(--accent-amber);
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: #fef08a;
   display: flex;
   align-items: center;
-  box-shadow: 0 1px 3px rgba(217, 119, 6, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* Core Tables Styling */
@@ -796,20 +839,20 @@ body.sidebar-open-lock {
 }
 
 .data-table th {
-  background-color: var(--primary-light);
-  color: var(--primary);
-  font-weight: 700;
+  background-color: #161926;
+  color: #facc15;
+  font-weight: 800;
   padding: 12px 16px;
-  border-bottom: 1.5px solid var(--border-color);
+  border-bottom: 2px solid #2a3048;
   white-space: nowrap;
 }
 
 .data-table td {
   padding: 12px 16px;
-  border-bottom: 1px solid var(--border-color);
-  color: var(--text-main);
+  border-bottom: 1px solid #1c2032;
+  color: #f8fafc;
   vertical-align: top;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .data-table tr:last-child td {
@@ -817,7 +860,7 @@ body.sidebar-open-lock {
 }
 
 .data-table tr:hover td {
-  background-color: var(--primary-light);
+  background-color: #171b29;
 }
 
 /* Table Column Widths & Alignments (반응형 최적화) */
@@ -825,42 +868,46 @@ body.sidebar-open-lock {
   width: 20%;
   min-width: 120px;
   font-weight: 700;
+  color: #ffffff;
   white-space: pre-line;
 }
 
 .col-table-core, .th-table-core {
   width: 34%;
   min-width: 200px;
+  color: #f8fafc;
 }
 
 .col-table-chunking, .th-table-chunking {
   width: 26%;
   min-width: 160px;
   font-style: italic;
-  color: var(--text-muted);
+  color: #fde047;
+  font-weight: 600;
 }
 
 .col-table-exam, .th-table-exam {
   width: 20%;
   min-width: 120px;
+  color: #fef08a;
 }
 
 /* Comparison Table Specifics */
 .comparison-table-wrapper {
   margin-top: 20px;
   margin-bottom: 24px;
-  border: 1px solid var(--border-color);
+  border: 1px solid #2a3048;
   border-radius: 10px;
   overflow: hidden;
 }
 
 .comparison-header {
-  background-color: var(--accent-purple-bg);
-  color: var(--accent-purple);
+  background-color: #1d1b2f;
+  color: #facc15;
   padding: 10px 16px;
   font-size: 0.92rem;
-  font-weight: 700;
-  border-bottom: 1px solid var(--border-color);
+  font-weight: 800;
+  border-bottom: 1px solid #2a3048;
   margin-bottom: 0;
 }
 
@@ -868,17 +915,19 @@ body.sidebar-open-lock {
   width: 22%;
   min-width: 120px;
   font-weight: 700;
+  color: #ffffff;
 }
 
 .col-comp-body, .th-comp-1, .th-comp-2 {
   width: 39%;
   min-width: 200px;
+  color: #f8fafc;
 }
 
 /* Template Answer Box */
 .template-answer-box {
-  background-color: var(--accent-green-bg);
-  border: 1.5px solid var(--accent-green-border);
+  background-color: #0c1a14;
+  border: 1.5px solid #065f46;
   border-radius: 12px;
   padding: 18px 22px;
   margin-top: 24px;
@@ -887,7 +936,7 @@ body.sidebar-open-lock {
 .template-header {
   font-size: 0.95rem;
   font-weight: 800;
-  color: var(--accent-green);
+  color: #34d399;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -895,8 +944,8 @@ body.sidebar-open-lock {
 }
 
 .template-content {
-  font-size: 0.9rem;
-  color: var(--text-main);
+  font-size: 0.92rem;
+  color: #f8fafc;
   white-space: pre-line;
   line-height: 1.7;
 }
@@ -908,15 +957,15 @@ body.sidebar-open-lock {
   border-radius: 4px;
   padding: 1px 5px;
   font-weight: 700;
-  color: var(--primary);
+  color: #facc15;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
 body.blind-mode-active .keyword-blind {
-  background-color: var(--blind-bg);
-  color: var(--blind-text);
-  border: 1px dashed var(--blind-border);
+  background-color: #1e2233;
+  color: transparent;
+  border: 1px dashed #4b5577;
   user-select: none;
   cursor: pointer;
   position: relative;
@@ -924,15 +973,15 @@ body.blind-mode-active .keyword-blind {
 
 body.blind-mode-active .keyword-blind::after {
   content: "❓ 클릭";
-  color: var(--text-muted);
+  color: #94a3b8;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 body.blind-mode-active .keyword-blind:hover,
 body.blind-mode-active .keyword-blind.revealed {
-  background-color: #fef08a !important;
-  color: #1e293b !important;
+  background-color: #3b2e04 !important;
+  color: #fef08a !important;
   border-color: #eab308 !important;
 }
 
