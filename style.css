@@ -79,36 +79,36 @@
 }
 
 [data-theme="light"] {
-  --bg-app: #f8fafc;
-  --bg-sidebar: #ffffff;
-  --bg-card: #ffffff;
-  --bg-header: #ffffff;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --text-inverse: #ffffff;
+  --bg-app: #101010;
+  --bg-sidebar: #101010;
+  --bg-card: #151515;
+  --bg-header: #101010;
+  --text-main: #ffffff;
+  --text-muted: #9ca3af;
+  --text-inverse: #101010;
   
-  --border-color: #e2e8f0;
-  --border-subtle: #f1f5f9;
+  --border-color: #262626;
+  --border-subtle: #1c1c1c;
   
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-light: #eff6ff;
-  --primary-border: #bfdbfe;
+  --primary: #facc15;
+  --primary-hover: #eab308;
+  --primary-light: #1c190a;
+  --primary-border: #6b5200;
   
-  --accent-amber: #d97706;
-  --accent-amber-bg: #fffbeb;
-  --accent-amber-border: #fde68a;
+  --accent-amber: #facc15;
+  --accent-amber-bg: #1c190a;
+  --accent-amber-border: #6b5200;
   
-  --accent-green: #059669;
-  --accent-green-bg: #ecfdf5;
-  --accent-green-border: #a7f3d0;
+  --accent-green: #4ade80;
+  --accent-green-bg: #101814;
+  --accent-green-border: #164e33;
   
-  --accent-purple: #7c3aed;
-  --accent-purple-bg: #f5f3ff;
+  --accent-purple: #c084fc;
+  --accent-purple-bg: #191424;
   
-  --blind-bg: #e2e8f0;
+  --blind-bg: #1e1e1e;
   --blind-text: transparent;
-  --blind-border: #94a3b8;
+  --blind-border: #444444;
 }
 
 /* Base Styles */
@@ -121,18 +121,22 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  background-color: #101010 !important;
+  color: #ffffff !important;
 }
 
 body {
   font-family: var(--font-main);
-  background-color: var(--bg-app);
-  color: var(--text-main);
+  background-color: #101010 !important;
+  color: #ffffff !important;
   line-height: 1.6;
   transition: background-color 0.2s ease, color 0.2s ease;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 body.sidebar-open-lock {
@@ -283,6 +287,67 @@ body.sidebar-open-lock {
   background-color: var(--accent-amber);
   color: #ffffff;
   box-shadow: 0 0 10px rgba(217, 119, 6, 0.4);
+}
+
+/* Font Size Control Box in Top Navbar (태블릿 및 모바일 최적화) */
+.font-size-box {
+  display: flex;
+  align-items: center;
+  background-color: #181818;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  padding: 3px 6px;
+  gap: 3px;
+}
+
+.btn-font-step {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #facc15;
+  font-weight: 800;
+  font-size: 0.84rem;
+  padding: 4px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  min-width: 32px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-font-step:hover {
+  background-color: #262626;
+  border-color: #facc15;
+}
+
+.font-size-display {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  min-width: 42px;
+  text-align: center;
+  user-select: none;
+  padding: 0 3px;
+}
+
+.btn-font-reset {
+  background: #262626;
+  border: 1px solid #3d3d3d;
+  color: #9ca3af;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-font-reset:hover {
+  background: #333333;
+  color: #ffffff;
+  border-color: #facc15;
 }
 
 /* Utility Buttons */
@@ -555,53 +620,93 @@ body.sidebar-open-lock {
   transition: margin-left 0.3s ease;
 }
 
-/* ADHD 학습 전략 인트로 배너 (안티그래비티 다크 스타일) */
-.intro-banner {
-  background: #141414;
+/* 간소화된 ADHD 핵심 가이드 바 (슬림 & 깔끔) */
+.intro-banner.compact {
+  background: linear-gradient(135deg, #1c190a 0%, #141414 100%);
   color: #ffffff;
-  border: 1.5px solid #facc15;
-  border-radius: 16px;
-  padding: 24px 28px;
-  margin-bottom: 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  border: 1.5px solid #ca8a04;
+  border-radius: 12px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
 }
 
-.intro-banner-inner {
+.intro-banner.compact.hidden {
+  display: none !important;
+}
+
+.intro-banner.compact .intro-banner-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 10px;
 }
 
-.intro-title {
-  font-size: 1.35rem;
-  font-weight: 800;
-  margin-bottom: 8px;
-  letter-spacing: -0.3px;
-  line-height: 1.35;
-  color: #ffffff;
+.intro-compact-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+  color: #e2e8f0;
 }
 
-.intro-desc {
-  font-size: 0.92rem;
+.intro-tag {
+  background: #facc15;
+  color: #000000;
+  font-weight: 900;
+  font-size: 0.76rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.intro-compact-text {
+  font-size: 0.86rem;
   color: #cbd5e1;
-  line-height: 1.6;
 }
 
-.intro-desc strong {
+.intro-compact-text strong {
   color: #facc15;
 }
 
-.intro-stats-badge {
-  background: #1f1b0a;
-  border: 1.5px solid #ca8a04;
-  padding: 12px 18px;
-  border-radius: 12px;
-  font-size: 0.85rem;
+.intro-compact-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.intro-mini-badge {
+  background: #262626;
+  color: #fde047;
+  border: 1px solid #6b5200;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.76rem;
   font-weight: 700;
-  color: #fef08a;
   white-space: nowrap;
+}
+
+.intro-close-btn {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-close-btn:hover {
+  background: #333333;
+  color: #facc15;
 }
 
 /* Anchor Scroll Margin (상단 고정 헤더 가림 방지) */
@@ -862,84 +967,91 @@ body.sidebar-open-lock {
   background-color: #1a1a1a;
 }
 
-/* Table Column Widths & Alignments (반응형 최적화) */
+/* Table Column Widths & High-Contrast Visual Styling (눈에 쏙 들어오는 가독성) */
 .col-table-cat, .th-table-cat {
   width: 20%;
   min-width: 120px;
-  font-weight: 700;
-  color: #ffffff;
+  font-weight: 800;
+  color: #facc15 !important;
   white-space: pre-line;
+  font-size: 0.92rem;
 }
 
 .col-table-core, .th-table-core {
   width: 34%;
   min-width: 200px;
-  color: #f8fafc;
+  color: #f1f5f9;
+  line-height: 1.65;
 }
 
 .col-table-chunking, .th-table-chunking {
   width: 26%;
   min-width: 160px;
-  font-style: italic;
-  color: #fde047;
+  color: #93c5fd;
   font-weight: 600;
+  line-height: 1.6;
 }
 
 .col-table-exam, .th-table-exam {
   width: 20%;
-  min-width: 120px;
-  color: #fef08a;
+  min-width: 130px;
+  color: #4ade80 !important;
+  font-weight: 800;
+  line-height: 1.6;
 }
 
 /* Comparison Table Specifics */
 .comparison-table-wrapper {
   margin-top: 20px;
   margin-bottom: 24px;
-  border: 1px solid #262626;
-  border-radius: 10px;
+  border: 1.5px solid #262626;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .comparison-header {
-  background-color: #181818;
+  background: linear-gradient(135deg, #1f1b0a 0%, #151515 100%);
   color: #facc15;
-  padding: 10px 16px;
-  font-size: 0.92rem;
+  padding: 12px 18px;
+  font-size: 0.94rem;
   font-weight: 800;
-  border-bottom: 1px solid #262626;
+  border-bottom: 1.5px solid #6b5200;
   margin-bottom: 0;
 }
 
 .col-comp-cat, .th-comp-0 {
   width: 22%;
   min-width: 120px;
-  font-weight: 700;
-  color: #ffffff;
+  font-weight: 800;
+  color: #facc15;
 }
 
 .col-comp-body, .th-comp-1, .th-comp-2 {
   width: 39%;
   min-width: 200px;
   color: #f8fafc;
+  line-height: 1.65;
 }
 
-/* Template Answer Box */
+/* Template Answer Box (실전 만점 서술형 답안 템플릿) */
 .template-answer-box {
-  background-color: #0c1a14;
-  border: 1.5px solid #065f46;
-  border-radius: 12px;
-  padding: 18px 22px;
+  background: linear-gradient(135deg, #071c14 0%, #0d281e 100%);
+  border: 1.5px solid #10b981;
+  border-radius: 14px;
+  padding: 20px 24px;
   margin-top: 24px;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.15);
 }
 
 .template-header {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-weight: 800;
-  color: #34d399;
-  margin-bottom: 10px;
+  color: #4ade80;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .template-content {
@@ -1036,6 +1148,187 @@ body.blind-mode-active .keyword-blind.revealed::after {
 
 .btn-float-menu {
   display: none;
+}
+
+/* Floating Font Button (태블릿 전용 강조) */
+.btn-float-font {
+  background-color: #1a1a1a !important;
+  color: #facc15 !important;
+  border: 1.5px solid #facc15 !important;
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+}
+
+.btn-float-font:hover {
+  background-color: #facc15 !important;
+  color: #000000 !important;
+}
+
+/* Tablet & Mobile Floating Font Popover Panel */
+.font-popup-panel {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: min(340px, calc(100vw - 32px));
+  background-color: #141414;
+  border: 1.5px solid #facc15;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.95), 0 0 15px rgba(250, 204, 21, 0.25);
+  z-index: 95;
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  animation: fontPopIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.font-popup-panel.active {
+  display: flex;
+}
+
+@keyframes fontPopIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.font-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #262626;
+  padding-bottom: 10px;
+}
+
+.font-popup-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.font-current-pill {
+  background-color: #1c190a;
+  color: #facc15;
+  border: 1px solid #6b5200;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.font-popup-close {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+
+.font-popup-close:hover {
+  background-color: #262626;
+  color: #ffffff;
+}
+
+.font-preset-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #9ca3af;
+  margin-bottom: 6px;
+}
+
+.font-preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.btn-preset {
+  background-color: #1e1e1e;
+  border: 1px solid #333333;
+  color: #d1d5db;
+  padding: 8px 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.btn-preset:hover {
+  border-color: #facc15;
+  color: #facc15;
+  background-color: #262626;
+}
+
+.btn-preset.active {
+  background-color: #facc15;
+  color: #000000;
+  border-color: #facc15;
+  font-weight: 900;
+}
+
+.font-stepper-group {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.btn-stepper {
+  flex: 1;
+  padding: 9px 8px;
+  background-color: #1e1e1e;
+  border: 1px solid #333333;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-stepper:hover {
+  background-color: #262626;
+  border-color: #facc15;
+  color: #facc15;
+}
+
+.btn-stepper.inc {
+  background-color: #1c190a;
+  border-color: #6b5200;
+  color: #facc15;
+}
+
+.btn-stepper.inc:hover {
+  background-color: #facc15;
+  color: #000000;
+}
+
+.btn-stepper.reset {
+  color: #9ca3af;
+}
+
+/* Target Topic Card Highlight (#counsel-03 바로 이동 시 포커스 애니메이션) */
+.topic-card:target {
+  border-color: #facc15 !important;
+  box-shadow: 0 0 0 2px #facc15, 0 10px 30px rgba(250, 204, 21, 0.25) !important;
+  animation: targetFocusPulse 2.5s ease-in-out;
+}
+
+@keyframes targetFocusPulse {
+  0% { outline: 3px solid #facc15; outline-offset: 4px; }
+  50% { outline: 3px solid #facc15; outline-offset: 6px; }
+  100% { outline: 3px solid transparent; outline-offset: 0; }
 }
 
 .mobile-menu-btn {
@@ -1147,6 +1440,27 @@ body.blind-mode-active .keyword-blind.revealed::after {
 
   .blind-text-mobile {
     display: inline;
+  }
+
+  .font-size-box {
+    padding: 2px 4px;
+    gap: 2px;
+  }
+
+  .btn-font-step {
+    min-width: 26px;
+    height: 26px;
+    padding: 2px 4px;
+    font-size: 0.75rem;
+  }
+
+  .font-size-display {
+    min-width: 36px;
+    font-size: 0.72rem;
+  }
+
+  .btn-font-reset {
+    display: none;
   }
 
   .btn-tool {

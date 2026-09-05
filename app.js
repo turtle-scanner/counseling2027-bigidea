@@ -17,9 +17,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const chipAll = document.getElementById("chipAll");
   const chipP3 = document.getElementById("chipP3");
   const btnBlindToggle = document.getElementById("btnBlindToggle");
-  const btnThemeToggle = document.getElementById("btnThemeToggle");
   const btnFontIncrease = document.getElementById("btnFontIncrease");
   const btnFontDecrease = document.getElementById("btnFontDecrease");
+  const fontSizeDisplay = document.getElementById("fontSizeDisplay");
+  const btnFontReset = document.getElementById("btnFontReset");
+  const btnFloatFont = document.getElementById("btnFloatFont");
+  const fontPopupPanel = document.getElementById("fontPopupPanel");
+  const btnFontPopupClose = document.getElementById("btnFontPopupClose");
+  const fontPopupPercent = document.getElementById("fontPopupPercent");
+  const btnStepperDec = document.getElementById("btnStepperDec");
+  const btnStepperInc = document.getElementById("btnStepperInc");
+  const btnStepperReset = document.getElementById("btnStepperReset");
+  const presetBtns = document.querySelectorAll(".btn-preset");
   const progressPercent = document.getElementById("progressPercent");
   const progressFill = document.getElementById("progressFill");
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
@@ -388,40 +397,101 @@ document.addEventListener("DOMContentLoaded", () => {
     pomoStartBtn.textContent = "▶";
   });
 
-  // 9. 테마 토글 (안티그래비티 딥 블랙 테마 기본 적용)
-  let savedTheme = localStorage.getItem("counseling_theme");
-  if (!savedTheme || savedTheme === "light") {
-    savedTheme = "dark";
-    localStorage.setItem("counseling_theme", "dark");
-  }
-  document.documentElement.setAttribute("data-theme", savedTheme);
-  btnThemeToggle.textContent = savedTheme === "dark" ? "☀️" : "🌙";
+  // 9. 안티그래비티 딥 블랙 테마 영구 강제 (검은 배경, 흰색 본문, 노란색 포인트)
+  document.documentElement.setAttribute("data-theme", "dark");
+  localStorage.setItem("counseling_theme", "dark");
 
-  btnThemeToggle.addEventListener("click", () => {
-    const curTheme = document.documentElement.getAttribute("data-theme");
-    const newTheme = curTheme === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("counseling_theme", newTheme);
-    btnThemeToggle.textContent = newTheme === "dark" ? "☀️" : "🌙";
-  });
-
-  // 10. 폰트 크기 조절 및 저장 (태블릿 및 모바일 가독성 최적화)
+  // 10. 태블릿 및 모바일 맞춤형 글자 크기 조절 시스템 (13px ~ 32px 지원)
   function applyFontSize(size) {
-    fontSizeLevel = Math.max(13, Math.min(22, size));
+    fontSizeLevel = Math.max(13, Math.min(32, size));
     document.documentElement.style.fontSize = `${fontSizeLevel}px`;
     localStorage.setItem("counseling_font_size", fontSizeLevel);
+
+    const pct = Math.round((fontSizeLevel / 16) * 100);
+    if (fontSizeDisplay) fontSizeDisplay.textContent = `${pct}%`;
+    if (fontPopupPercent) {
+      let desc = pct <= 90 ? "작게" : pct === 100 ? "보통" : pct <= 130 ? "태블릿 추천" : pct <= 160 ? "크게" : "특대";
+      fontPopupPercent.textContent = `${pct}% (${desc})`;
+    }
+
+    if (presetBtns) {
+      presetBtns.forEach((btn) => {
+        const btnSize = parseInt(btn.getAttribute("data-size"), 10);
+        btn.classList.toggle("active", btnSize === fontSizeLevel);
+      });
+    }
   }
 
-  // 저장된 폰트 크기 적용
+  // 초기 폰트 크기 적용
   applyFontSize(fontSizeLevel);
 
-  btnFontIncrease.addEventListener("click", () => {
-    applyFontSize(fontSizeLevel + 1);
-  });
+  // 상단 네비바 글자 크기 버튼
+  if (btnFontIncrease) {
+    btnFontIncrease.addEventListener("click", () => applyFontSize(fontSizeLevel + 1));
+  }
+  if (btnFontDecrease) {
+    btnFontDecrease.addEventListener("click", () => applyFontSize(fontSizeLevel - 1));
+  }
+  if (btnFontReset) {
+    btnFontReset.addEventListener("click", () => applyFontSize(16));
+  }
 
-  btnFontDecrease.addEventListener("click", () => {
-    applyFontSize(fontSizeLevel - 1);
-  });
+  // 태블릿 플로팅 퀵 글자 조절기 (Floating Font Popover)
+  if (btnFloatFont && fontPopupPanel) {
+    btnFloatFont.addEventListener("click", (e) => {
+      e.stopPropagation();
+      fontPopupPanel.classList.toggle("active");
+    });
+
+    if (btnFontPopupClose) {
+      btnFontPopupClose.addEventListener("click", (e) => {
+        e.stopPropagation();
+        fontPopupPanel.classList.remove("active");
+      });
+    }
+
+    // 팝업 외부 터치 시 닫기
+    document.addEventListener("click", (e) => {
+      if (
+        fontPopupPanel.classList.contains("active") &&
+        !fontPopupPanel.contains(e.target) &&
+        !btnFloatFont.contains(e.target)
+      ) {
+        fontPopupPanel.classList.remove("active");
+      }
+    });
+  }
+
+  // 프리셋 버튼 이벤트
+  if (presetBtns) {
+    presetBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const targetSize = parseInt(btn.getAttribute("data-size"), 10);
+        applyFontSize(targetSize);
+      });
+    });
+  }
+
+  // 팝업 내 스텝 조절 버튼
+  if (btnStepperDec) {
+    btnStepperDec.addEventListener("click", (e) => {
+      e.stopPropagation();
+      applyFontSize(fontSizeLevel - 1);
+    });
+  }
+  if (btnStepperInc) {
+    btnStepperInc.addEventListener("click", (e) => {
+      e.stopPropagation();
+      applyFontSize(fontSizeLevel + 1);
+    });
+  }
+  if (btnStepperReset) {
+    btnStepperReset.addEventListener("click", (e) => {
+      e.stopPropagation();
+      applyFontSize(16);
+    });
+  }
 
   // 11. 모바일 사이드바 서랍 제어 (배경 클릭, 닫기 버튼, 플로팅 목차 버튼 연동)
   function openSidebar() {
@@ -476,8 +546,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // 13. URL 해시(#counsel-03 등) 자동 스크롤 연동 (상단 네비바 가림 방지)
+  function scrollToHash(immediate = false) {
+    const hash = window.location.hash;
+    if (hash && hash.length > 1) {
+      try {
+        const target = document.querySelector(hash);
+        if (target) {
+          const navbarHeight = 72;
+          const targetY = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+          window.scrollTo({
+            top: targetY,
+            behavior: immediate ? "auto" : "smooth"
+          });
+        }
+      } catch (e) {
+        console.warn("Hash scroll note:", e);
+      }
+    }
+  }
+
+  window.addEventListener("hashchange", () => scrollToHash(false));
+
   // 초기 실행
   renderSidebar();
   renderContent();
   updateProgress();
+  setTimeout(() => scrollToHash(true), 50);
 });
