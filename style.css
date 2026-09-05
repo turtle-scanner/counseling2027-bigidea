@@ -5,77 +5,77 @@
 :root {
   --font-main: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   
-  /* 안티그래비티 딥 블랙 테마 (기본값) */
-  --bg-app: #090a0f;           /* 안티그래비티 딥 블랙 */
-  --bg-sidebar: #0d0e15;       /* 사이드바 다크 */
-  --bg-card: #13151f;          /* 카드 블랙 표면 */
-  --bg-header: #0d0e15;        /* 상단 헤더 */
-  --text-main: #f8fafc;        /* 흰색 본문 텍스트 */
-  --text-muted: #94a3b8;       /* 보조 은은한 회색 */
-  --text-inverse: #090a0f;
+  /* 안티그래비티 순수 딥 블랙 & 옐로우 테마 (기본값) */
+  --bg-app: #101010;           /* 안티그래비티 순수 블랙 rgb(16,16,16) */
+  --bg-sidebar: #101010;       /* 완전한 블랙 사이드바 */
+  --bg-card: #151515;          /* 다크 서피스 카드 rgb(21,21,21) */
+  --bg-header: #101010;        /* 상단 헤더 */
+  --text-main: #ffffff;        /* 순백색 본문 텍스트 */
+  --text-muted: #9ca3af;       /* 차분한 그레이 */
+  --text-inverse: #101010;
   
-  --border-color: #232738;
-  --border-subtle: #171924;
+  --border-color: #262626;     /* 안티그래비티 디바이더 라인 */
+  --border-subtle: #1c1c1c;
   
-  /* 노란색 (Yellow) 핵심 강조 */
-  --primary: #facc15;          /* 선명한 골든 옐로우 */
+  /* 골든 옐로우 (Yellow) 핵심 강조 */
+  --primary: #facc15;          /* 선명한 옐로우 */
   --primary-hover: #eab308;
-  --primary-light: #231f0d;    /* 옐로우 틴트 다크 배경 */
-  --primary-border: #854d0e;
+  --primary-light: #1c190a;
+  --primary-border: #6b5200;
   
   --accent-amber: #facc15;
-  --accent-amber-bg: #211c08;
-  --accent-amber-border: #854d0e;
+  --accent-amber-bg: #1c190a;
+  --accent-amber-border: #6b5200;
   
-  --accent-green: #34d399;
-  --accent-green-bg: #0b1f17;
-  --accent-green-border: #065f46;
+  --accent-green: #4ade80;
+  --accent-green-bg: #101814;
+  --accent-green-border: #164e33;
   
   --accent-purple: #c084fc;
-  --accent-purple-bg: #1e1b2e;
+  --accent-purple-bg: #191424;
   
-  --blind-bg: #222638;
+  --blind-bg: #1e1e1e;
   --blind-text: transparent;
-  --blind-border: #475569;
+  --blind-border: #444444;
   
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.6), 0 2px 4px -2px rgb(0 0 0 / 0.6);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.7), 0 4px 6px -4px rgb(0 0 0 / 0.7);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.7);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.8), 0 2px 4px -2px rgb(0 0 0 / 0.8);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.9), 0 4px 6px -4px rgb(0 0 0 / 0.9);
 
   --sidebar-width: 320px;
 }
 
 [data-theme="dark"] {
-  --bg-app: #090a0f;
-  --bg-sidebar: #0d0e15;
-  --bg-card: #13151f;
-  --bg-header: #0d0e15;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-inverse: #090a0f;
+  --bg-app: #101010;
+  --bg-sidebar: #101010;
+  --bg-card: #151515;
+  --bg-header: #101010;
+  --text-main: #ffffff;
+  --text-muted: #9ca3af;
+  --text-inverse: #101010;
   
-  --border-color: #232738;
-  --border-subtle: #171924;
+  --border-color: #262626;
+  --border-subtle: #1c1c1c;
   
   --primary: #facc15;
   --primary-hover: #eab308;
-  --primary-light: #231f0d;
-  --primary-border: #854d0e;
+  --primary-light: #1c190a;
+  --primary-border: #6b5200;
   
   --accent-amber: #facc15;
-  --accent-amber-bg: #211c08;
-  --accent-amber-border: #854d0e;
+  --accent-amber-bg: #1c190a;
+  --accent-amber-border: #6b5200;
   
-  --accent-green: #34d399;
-  --accent-green-bg: #0b1f17;
-  --accent-green-border: #065f46;
+  --accent-green: #4ade80;
+  --accent-green-bg: #101814;
+  --accent-green-border: #164e33;
   
   --accent-purple: #c084fc;
-  --accent-purple-bg: #1e1b2e;
+  --accent-purple-bg: #191424;
   
-  --blind-bg: #222638;
+  --blind-bg: #1e1e1e;
   --blind-text: transparent;
-  --blind-border: #475569;
+  --blind-border: #444444;
 }
 
 [data-theme="light"] {
@@ -143,8 +143,8 @@ body.sidebar-open-lock {
 .sidebar-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(15, 23, 42, 0.5);
-  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
   z-index: 55;
   opacity: 0;
   visibility: hidden;
@@ -186,26 +186,25 @@ body.sidebar-open-lock {
 }
 
 .brand-badge {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  color: #ffffff;
+  background: #facc15;
+  color: #000000;
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 0.5px;
 }
 
 .brand-title {
   font-size: 1.15rem;
   font-weight: 800;
-  color: var(--text-main);
+  color: #ffffff;
   letter-spacing: -0.5px;
 }
 
 .brand-title-accent {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #facc15;
+  -webkit-text-fill-color: #facc15;
   font-weight: 800;
 }
 
@@ -443,7 +442,7 @@ body.sidebar-open-lock {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #10b981, #2563eb);
+  background: linear-gradient(90deg, #ca8a04, #facc15);
   width: 0%;
   transition: width 0.3s ease;
 }
@@ -558,13 +557,13 @@ body.sidebar-open-lock {
 
 /* ADHD 학습 전략 인트로 배너 (안티그래비티 다크 스타일) */
 .intro-banner {
-  background: linear-gradient(135deg, #0d101a, #151a28);
-  color: #f8fafc;
-  border: 1.5px solid #ca8a04;
+  background: #141414;
+  color: #ffffff;
+  border: 1.5px solid #facc15;
   border-radius: 16px;
   padding: 24px 28px;
   margin-bottom: 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 }
 
 .intro-banner-inner {
@@ -702,9 +701,9 @@ body.sidebar-open-lock {
 }
 
 .badge-priority.p1 {
-  background-color: #171c28;
-  color: #94a3b8;
-  border: 1px solid #282f44;
+  background-color: #1a1a1a;
+  color: #a1a1aa;
+  border: 1px solid #333333;
 }
 
 .badge-exam {
@@ -839,17 +838,17 @@ body.sidebar-open-lock {
 }
 
 .data-table th {
-  background-color: #161926;
+  background-color: #181818;
   color: #facc15;
   font-weight: 800;
   padding: 12px 16px;
-  border-bottom: 2px solid #2a3048;
+  border-bottom: 2px solid #262626;
   white-space: nowrap;
 }
 
 .data-table td {
   padding: 12px 16px;
-  border-bottom: 1px solid #1c2032;
+  border-bottom: 1px solid #222222;
   color: #f8fafc;
   vertical-align: top;
   line-height: 1.6;
@@ -860,7 +859,7 @@ body.sidebar-open-lock {
 }
 
 .data-table tr:hover td {
-  background-color: #171b29;
+  background-color: #1a1a1a;
 }
 
 /* Table Column Widths & Alignments (반응형 최적화) */
@@ -896,18 +895,18 @@ body.sidebar-open-lock {
 .comparison-table-wrapper {
   margin-top: 20px;
   margin-bottom: 24px;
-  border: 1px solid #2a3048;
+  border: 1px solid #262626;
   border-radius: 10px;
   overflow: hidden;
 }
 
 .comparison-header {
-  background-color: #1d1b2f;
+  background-color: #181818;
   color: #facc15;
   padding: 10px 16px;
   font-size: 0.92rem;
   font-weight: 800;
-  border-bottom: 1px solid #2a3048;
+  border-bottom: 1px solid #262626;
   margin-bottom: 0;
 }
 
@@ -963,9 +962,9 @@ body.sidebar-open-lock {
 }
 
 body.blind-mode-active .keyword-blind {
-  background-color: #1e2233;
+  background-color: #1e1e1e;
   color: transparent;
-  border: 1px dashed #4b5577;
+  border: 1px dashed #555555;
   user-select: none;
   cursor: pointer;
   position: relative;
