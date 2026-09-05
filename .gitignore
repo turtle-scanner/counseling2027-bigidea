@@ -1,0 +1,4 @@
+﻿*.tmp
+*screenshot*.png
+verify*.py
+__pycache__/
