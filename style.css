@@ -752,17 +752,36 @@ body.sidebar-open-lock {
 /* Topic Card */
 .topic-card {
   background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
   padding: 28px;
   margin-bottom: 40px;
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.2s, border-color 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.topic-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(250, 204, 21, 0.35), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .topic-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--primary-border);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.85);
+  border-color: rgba(250, 204, 21, 0.35);
+  transform: translateY(-2px);
+}
+
+.topic-card:hover::before {
+  opacity: 1;
 }
 
 .topic-header {
@@ -782,27 +801,33 @@ body.sidebar-open-lock {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .badge-priority {
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .badge-priority.p3 {
-  background-color: #3b0b0b;
-  color: #f87171;
-  border: 1px solid #7f1d1d;
+  background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+  color: #ffffff;
+  border: 1px solid #ef4444;
+  box-shadow: 0 2px 10px rgba(220, 38, 38, 0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 .badge-priority.p2 {
-  background-color: #2b1f06;
+  background: linear-gradient(135deg, #2b1f06 0%, #451a03 100%);
   color: #facc15;
   border: 1px solid #78350f;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .badge-priority.p1 {
@@ -1034,7 +1059,243 @@ body.sidebar-open-lock {
   line-height: 1.65;
 }
 
-/* Template Answer Box (실전 만점 서술형 답안 템플릿) */
+/* ==========================================================================
+   한국교육과정평가원 전문상담 서술형 정식 답안지 (4줄 규격) UI 스타일
+   ========================================================================== */
+.official-answer-sheet {
+  background: linear-gradient(180deg, #0e1713 0%, #080f0c 100%);
+  border: 1.5px solid rgba(74, 222, 128, 0.3);
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(74, 222, 128, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.official-answer-sheet::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #10b981, #facc15, #10b981);
+}
+
+/* 상단 배너 */
+.sheet-top-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 16px;
+}
+
+.sheet-top-title-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sheet-gov-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  padding: 5px 12px;
+  border-radius: 8px;
+  color: #4ade80;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+.sheet-gov-icon {
+  font-size: 1rem;
+}
+
+.sheet-spec-tag {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(250, 204, 21, 0.12);
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #facc15;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+/* 4줄 답안 복사 버튼 */
+.btn-copy-answer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #13241b;
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  color: #4ade80;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.btn-copy-answer:hover {
+  background: #1a3627;
+  border-color: #4ade80;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-copy-answer.copied {
+  background: #047857 !important;
+  border-color: #34d399 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 14px rgba(52, 211, 153, 0.5) !important;
+}
+
+/* 예상 문항 박스 */
+.sheet-question-container {
+  background: rgba(0, 0, 0, 0.45);
+  border-left: 3.5px solid #facc15;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.sheet-question-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #facc15;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.sheet-question-body {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #f8fafc;
+  line-height: 1.55;
+  word-break: keep-all;
+}
+
+/* 실제 답안지 용지 (줄노트) */
+.sheet-paper {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 8px 18px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7);
+  margin-bottom: 16px;
+}
+
+.sheet-lines-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet-line-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px dashed rgba(74, 222, 128, 0.22);
+  transition: background 0.15s ease;
+}
+
+.sheet-line-row:last-child {
+  border-bottom: none;
+}
+
+.sheet-line-row:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+/* 줄 번호 칸 (실제 답안지 01~04 박스) */
+.sheet-line-num-col {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  background: #13241b;
+  border: 1.5px solid rgba(74, 222, 128, 0.4);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.sheet-line-num {
+  font-family: "SF Mono", "Fira Code", "Courier New", monospace;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #4ade80;
+  letter-spacing: -0.5px;
+}
+
+/* 줄 본문 영역 */
+.sheet-line-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sheet-line-guide-tag {
+  display: inline-block;
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: #a7f3d0;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.sheet-line-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #ffffff;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 하단 작성 가이드 알림 */
+.sheet-bottom-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.sheet-bottom-notice strong {
+  color: #facc15;
+}
+
+.sheet-bottom-notice .notice-icon {
+  font-size: 0.95rem;
+  color: #facc15;
+  flex-shrink: 0;
+}
+
+/* 기존 레거시 클래스 호환 지원 */
 .template-answer-box {
   background: linear-gradient(135deg, #071c14 0%, #0d281e 100%);
   border: 1.5px solid #10b981;
@@ -1601,6 +1862,58 @@ body.blind-mode-active .keyword-blind.revealed::after {
   .comparison-table-wrapper {
     margin-top: 16px;
     margin-bottom: 18px;
+  }
+
+  /* 서술형 정식 답안지 모바일 최적화 */
+  .official-answer-sheet {
+    padding: 16px 14px;
+    margin-top: 20px;
+    border-radius: 14px;
+  }
+
+  .sheet-top-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .sheet-top-title-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .btn-copy-answer {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 12px;
+  }
+
+  .sheet-paper {
+    padding: 6px 10px;
+  }
+
+  .sheet-line-row {
+    gap: 10px;
+    padding: 12px 0;
+  }
+
+  .sheet-line-num-col {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+  }
+
+  .sheet-line-num {
+    font-size: 0.9rem;
+  }
+
+  .sheet-line-guide-tag {
+    font-size: 0.7rem;
+  }
+
+  .sheet-line-text {
+    font-size: 0.92rem;
+    line-height: 1.6;
   }
 
   .template-answer-box {

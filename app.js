@@ -144,13 +144,69 @@ document.addEventListener("DOMContentLoaded", () => {
           `;
         }
 
-        // 서술형 답안 템플릿
+        // 한국교육과정평가원 서술형 정식 답안지 (4줄 규격) 렌더링
         let templateHtml = "";
         if (topic.templateAnswer) {
+          const ta = topic.templateAnswer;
+          const rawLines = ta.lines && ta.lines.length === 4 ? ta.lines : (ta.structure ? ta.structure.split("\n") : []);
+          
+          const guideTags = [
+            "줄 [01] · 핵심 개념 정의 및 직접 진단",
+            "줄 [02] · 기출 지문 단서 연계 및 발생 기제",
+            "줄 [03] · 상담교사의 구체적 개입 전략 및 발화",
+            "줄 [04] · 치료적 기대 효과 및 최종 행동 변화"
+          ];
+
+          let ruledRowsHtml = "";
+          rawLines.forEach((lineStr, lineIdx) => {
+            const lineNum = String(lineIdx + 1).padStart(2, "0");
+            const cleanContent = lineStr.replace(/^\[[0-9]+줄\]\s*/, "");
+            const guideTag = guideTags[lineIdx] || `답안 라인 ${lineNum}`;
+
+            ruledRowsHtml += `
+              <div class="sheet-line-row">
+                <div class="sheet-line-num-col">
+                  <span class="sheet-line-num">${lineNum}</span>
+                </div>
+                <div class="sheet-line-body">
+                  <div class="sheet-line-guide-tag">${guideTag}</div>
+                  <div class="sheet-line-text">${parseKeywords(cleanContent)}</div>
+                </div>
+              </div>
+            `;
+          });
+
           templateHtml = `
-            <div class="template-answer-box">
-              <div class="template-header">✍️ ${topic.templateAnswer.question}</div>
-              <div class="template-content">${parseKeywords(topic.templateAnswer.structure)}</div>
+            <div class="official-answer-sheet" id="sheet-${topic.id}">
+              <div class="sheet-top-banner">
+                <div class="sheet-top-title-group">
+                  <div class="sheet-gov-badge">
+                    <span class="sheet-gov-icon">🏛️</span>
+                    <span class="sheet-gov-text">한국교육과정평가원 전문상담 서술형 정식 답안지</span>
+                  </div>
+                  <div class="sheet-spec-tag">문항당 4점 · 정확히 4줄 답안란 규격</div>
+                </div>
+                <button class="btn-copy-answer" data-topic-id="${topic.id}" title="4줄 모범 답안 전체 복사">
+                  <span class="btn-copy-icon">📋</span>
+                  <span>4줄 답안 복사</span>
+                </button>
+              </div>
+
+              <div class="sheet-question-container">
+                <div class="sheet-question-label">【2027 실전 출제 예상 문항】</div>
+                <div class="sheet-question-body">${ta.question.replace(/^\[2027 실전 예상\]\s*/, "")}</div>
+              </div>
+
+              <div class="sheet-paper">
+                <div class="sheet-lines-container">
+                  ${ruledRowsHtml}
+                </div>
+              </div>
+
+              <div class="sheet-bottom-notice">
+                <span class="notice-icon">⚡</span>
+                <span><strong>4줄 압축 작성 공식</strong>: [01 개념진단] ➔ [02 발생기제] ➔ [03 교사개입] ➔ [04 치료효과] | 황금색 키워드는 채점 핵심 배점 요소입니다.</span>
+              </div>
             </div>
           `;
         }
@@ -205,6 +261,42 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       contentArea.appendChild(subjectSec);
+    });
+
+    // 4줄 답안 복사 버튼 이벤트 연결
+    document.querySelectorAll(".btn-copy-answer").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const topicId = btn.getAttribute("data-topic-id");
+        let targetTopic = null;
+        for (const sub of TEXTBOOK_DATA) {
+          const found = sub.topics.find((t) => t.id === topicId);
+          if (found) { targetTopic = found; break; }
+        }
+        if (!targetTopic || !targetTopic.templateAnswer) return;
+
+        const ta = targetTopic.templateAnswer;
+        const raw = ta.lines && ta.lines.length === 4 ? ta.lines : (ta.structure ? ta.structure.split("\n") : []);
+        const cleanLines = raw.map((l, idx) => {
+          const stripped = l.replace(/\{\{(.*?)\}\}/g, "$1").replace(/^\[[0-9]+줄\]\s*/, "");
+          const numStr = String(idx + 1).padStart(2, "0");
+          return `[${numStr}] ${stripped}`;
+        });
+
+        const copyText = `[2027 전문상담 임용 모범 답안]\n주제: ${targetTopic.title}\n문항: ${ta.question}\n\n【한국교육과정평가원 서술형 정식 4줄 답안】\n${cleanLines.join("\n")}`;
+
+        navigator.clipboard.writeText(copyText).then(() => {
+          const origContent = btn.innerHTML;
+          btn.innerHTML = `<span class="btn-copy-icon">✓</span><span>복사 완료!</span>`;
+          btn.classList.add("copied");
+          setTimeout(() => {
+            btn.innerHTML = origContent;
+            btn.classList.remove("copied");
+          }, 1800);
+        }).catch((err) => {
+          console.error("복사 실패:", err);
+        });
+      });
     });
 
     // 완료 체크 버튼 이벤트 연결
@@ -568,7 +660,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("hashchange", () => scrollToHash(false));
 
+  // 14. 간소화된 인트로 배너 닫기 및 기억 로직
+  window.dismissIntroBanner = function () {
+    const banner = document.getElementById("introBanner");
+    if (banner) {
+      banner.classList.add("hidden");
+      localStorage.setItem("counseling_hide_intro", "true");
+    }
+  };
+
+  function checkIntroBannerState() {
+    const isHidden = localStorage.getItem("counseling_hide_intro") === "true";
+    const banner = document.getElementById("introBanner");
+    if (banner && isHidden) {
+      banner.classList.add("hidden");
+    }
+  }
+
   // 초기 실행
+  checkIntroBannerState();
   renderSidebar();
   renderContent();
   updateProgress();
