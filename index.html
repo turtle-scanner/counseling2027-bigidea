@@ -13,7 +13,7 @@
   <link rel="icon" type="image/png" href="icon-192.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css?v=20270906_4lines">
+  <link rel="stylesheet" href="style.css?v=20270906_90points">
   <!-- Pretendard 폰트 최적화 -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 </head>
@@ -35,6 +35,13 @@
         <button class="pomo-btn" id="pomoStartBtn" title="시작/일시정지">▶</button>
         <button class="pomo-btn reset" id="pomoResetBtn" title="리셋">⟲</button>
       </div>
+
+      <!-- 오늘의 1초 랜덤 기출 인출 퀴즈 (Flashcard) -->
+      <button class="btn-quiz-toggle" id="btnRandomQuiz" title="오늘의 1초 랜덤 기출 인출 훈련">
+        <span>🎲</span>
+        <span class="quiz-text-desktop">랜덤 퀴즈</span>
+        <span class="quiz-text-mobile">퀴즈</span>
+      </button>
 
       <!-- Active Recall (키워드 블라인드 인출) 토글 -->
       <button class="btn-blind-toggle" id="btnBlindToggle" title="핵심 채점 키워드를 가려 인출 훈련을 합니다">
@@ -73,10 +80,11 @@
           <input type="text" id="searchInput" class="search-input" placeholder="이론, 학자, 키워드 검색...">
         </div>
 
-        <!-- 출제예상 필터 -->
+        <!-- 출제예상 및 오답노트 필터 -->
         <div class="filter-chips">
           <button class="chip-btn active" id="chipAll">전체 보기</button>
-          <button class="chip-btn" id="chipP3">★★★ 올해 0순위만</button>
+          <button class="chip-btn" id="chipP3">★★★ 0순위</button>
+          <button class="chip-btn chip-bookmark" id="chipBookmark">⭐ 오답노트 (<span id="bookmarkCount">0</span>)</button>
         </div>
 
         <!-- 학습 진행률 -->
@@ -155,13 +163,46 @@
     </div>
   </div>
 
+  <!-- 오늘의 1초 랜덤 기출 인출 퀴즈 모달 -->
+  <div class="quiz-modal-backdrop" id="quizModalBackdrop">
+    <div class="quiz-modal-card">
+      <div class="quiz-modal-header">
+        <div class="quiz-modal-title-group">
+          <span class="quiz-modal-icon">🎲</span>
+          <span class="quiz-modal-title">오늘의 1초 기출 스피드 인출 훈련</span>
+          <span class="quiz-modal-badge" id="quizModalBadge">0순위</span>
+        </div>
+        <button class="quiz-modal-close" id="btnQuizClose" aria-label="닫기">✕</button>
+      </div>
+      <div class="quiz-modal-subject" id="quizModalSubject">과목명</div>
+      <h3 class="quiz-modal-topic-title" id="quizModalTopicTitle">주제명</h3>
+
+      <div class="quiz-modal-question-box">
+        <div class="quiz-q-label">【2027 실전 출제 예상 문항】</div>
+        <div class="quiz-q-text" id="quizModalQuestion">문항을 불러오는 중...</div>
+      </div>
+
+      <div class="quiz-modal-action-bar">
+        <button class="btn-quiz-reveal" id="btnQuizReveal">💡 4줄 정식 모범답안 확인</button>
+        <button class="btn-quiz-next" id="btnQuizNext">다음 랜덤 문항 ▶</button>
+      </div>
+
+      <!-- 정답 및 비책 공개 영역 -->
+      <div class="quiz-modal-answer-area hidden" id="quizModalAnswerArea">
+        <div class="quiz-answer-title">🏛️ 평가원 4줄 서술형 모범 답안</div>
+        <div class="quiz-lines-box" id="quizModalLines"></div>
+        <div class="quiz-golden-formula" id="quizModalFormula"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="data.js?v=20270906_4lines"></script>
-  <script src="app.js?v=20270906_4lines"></script>
+  <script src="data.js?v=20270906_90points"></script>
+  <script src="app.js?v=20270906_90points"></script>
   <script>
     if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=20270906_4lines').catch(err => console.log('SW registration note:', err));
+        navigator.serviceWorker.register('./sw.js?v=20270906_90points').catch(err => console.log('SW registration note:', err));
       });
     }
   </script>
